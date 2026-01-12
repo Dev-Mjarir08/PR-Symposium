@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Synced Slider</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body class="bg-slate-900 min-h-screen flex items-center justify-center px-4">
+    <div class="w-full max-w-6xl relative">
+        <!-- ================= MAIN IMAGE SLIDER ================= -->
+        <div class="relative overflow-hidden rounded-2xl">
+            <img id="mainImage" src="./src/images/Slider_1.png"
+                class="w-full h-[420px] object-cover transition-all duration-500" alt="Main slider image">
+
+            <!-- arrows -->
+            <button onclick="prevSlide()"
+                class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                </svg>
+            </button>
+
+            <button onclick="nextSlide()"
+                class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- ================= THUMBNAILS ================= -->
+        <div class="flex justify-center gap-4 mt-5">
+            <img class="thumb w-[90px] h-[65px] object-cover rounded-xl cursor-pointer opacity-50 transition-opacity duration-300 border-2 border-transparent active:opacity-100 active:border-blue-500"
+                src="./src/images/Slider_1.png" alt="Thumbnail 1">
+            <img class="thumb w-[90px] h-[65px] object-cover rounded-xl cursor-pointer opacity-50 transition-opacity duration-300 border-2 border-transparent active:opacity-100 active:border-blue-500"
+                src="./src/images/Slider_2.jpg" alt="Thumbnail 2">
+            <img class="thumb w-[90px] h-[65px] object-cover rounded-xl cursor-pointer opacity-50 transition-opacity duration-300 border-2 border-transparent active:opacity-100 active:border-blue-500"
+                src="./src/images/Slider_3.png" alt="Thumbnail 3">
+            <img class="thumb w-[90px] h-[65px] object-cover rounded-xl cursor-pointer opacity-50 transition-opacity duration-300 border-2 border-transparent active:opacity-100 active:border-blue-500"
+                src="./src/images/Slider_4.jpg" alt="Thumbnail 4">
+        </div>
+
+
+
+
+
+        <!-- ================= JAVASCRIPT ================= -->
+        <script>
+            let images = [
+                "./src/images/Slider_1.png",
+                "./src/images/Slider_2.jpg",
+                "./src/images/Slider_3.png",
+                "./src/images/Slider_4.jpg"
+            ];
+
+            let current = 0;
+
+            let mainImage = document.getElementById("mainImage");
+            let thumbs = document.querySelectorAll(".thumb");
+            
+
+            function updateSlider() {
+                mainImage.src = images[current];
+
+                thumbs.forEach((el, i) => {
+                    if (i === current) {
+                        el.classList.add("opacity-100", "border-blue-500");
+                        el.classList.remove("opacity-50", "border-transparent");
+                    } else {
+                        el.classList.remove("opacity-100", "border-blue-500");
+                        el.classList.add("opacity-50", "border-transparent");
+                    }
+                });
+
+                dots.forEach((el, i) => {
+                    if (i === current) {
+                        el.classList.add("bg-blue-500");
+                        el.classList.remove("bg-slate-500");
+                    } else {
+                        el.classList.remove("bg-blue-500");
+                        el.classList.add("bg-slate-500");
+                    }
+                });
+
+                textItems.forEach((el, i) => {
+                    if (i === current) {
+                        el.classList.add("bg-blue-500", "text-white");
+                        el.classList.remove("text-blue-500");
+                    } else {
+                        el.classList.remove("bg-blue-500", "text-white");
+                        el.classList.add("text-blue-500");
+                    }
+                });
+            }
+
+            function nextSlide() {
+                current = (current + 1) % images.length;
+                updateSlider();
+            }
+
+            function prevSlide() {
+                current = (current - 1 + images.length) % images.length;
+                updateSlider();
+            }
+
+            thumbs.forEach((thumb, index) => {
+                thumb.addEventListener("click", () => {
+                    current = index;
+                    updateSlider();
+                });
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener("click", () => {
+                    current = index;
+                    updateSlider();
+                });
+            });
+
+            textItems.forEach((item, index) => {
+                item.addEventListener("click", () => {
+                    current = index;
+                    updateSlider();
+                });
+            });
+        </script>
+</body>
+
+</body>
+
+</html>
