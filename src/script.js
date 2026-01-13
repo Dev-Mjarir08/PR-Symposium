@@ -6,6 +6,7 @@ const blogMenu = document.getElementById('blogMenu');
 
 menuBtn.addEventListener('click', () => {
   mobileMenu.classList.remove('translate-x-full');
+  mobileMenu.classList.add('block')
 });
 
 closeBtn.addEventListener('click', () => {
@@ -81,7 +82,7 @@ function toggleTheme() {
   document.body.classList.toggle('bg-white');
   document.body.classList.toggle('text-gray-900');
   document.body.classList.toggle('bg-gray-900');
-  document.body.classList.toggle('text-white');
+  document.body.classList.toggle('text-black');
 }
 
 if (themeToggle) {
